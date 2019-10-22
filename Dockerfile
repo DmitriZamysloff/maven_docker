@@ -1,8 +1,9 @@
 FROM openjdk:13-jdk-alpine
 
-RUN apk add bash
-RUN apk add curl
-RUN apk add docker
+RUN apk add --no-cache bash
+RUN apk add --no-cache curl
+RUN apk add --no-cache openrc
+RUN apk add --no-cache docker
 RUN rc-update add docker boot
 
 ARG MAVEN_VERSION=3.6.2
