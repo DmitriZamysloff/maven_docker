@@ -1,10 +1,6 @@
 FROM openjdk:13-jdk-alpine
 
-RUN apk add --no-cache bash
-RUN apk add --no-cache curl
-RUN apk add --no-cache openrc
-RUN apk add --no-cache docker
-RUN apk add --no-cache npm
+RUN apk add --no-cache bash curl openrc docker npm
 RUN rc-update add docker boot
 
 ARG MAVEN_VERSION=3.6.2
@@ -28,3 +24,4 @@ COPY settings-docker.xml /usr/share/maven/ref/
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
+CMD ["npm"]
