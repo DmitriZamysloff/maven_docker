@@ -4,6 +4,7 @@ RUN apk add --no-cache bash
 RUN apk add --no-cache curl
 RUN apk add --no-cache openrc
 RUN apk add --no-cache docker
+RUN apk add --no-cache --update nodejs nodejs-npm
 RUN rc-update add docker boot
 
 ARG MAVEN_VERSION=3.6.2
