@@ -7,6 +7,7 @@ ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN yum -y install bash curl openrc docker \
   && yum -y install npm openssh-client git pip3 \
+  && service docker start \
   && chkconfig docker on \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
