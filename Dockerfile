@@ -1,18 +1,12 @@
-FROM openjdk:13-jdk-slim
+FROM openjdk:13-jdk-alpine
 
 ARG MAVEN_VERSION=3.6.3
 ARG USER_HOME_DIR="/root"
 ARG SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
-RUN set -eux \
-  && apt-get update \
-  && apt-get -y install bash curl \
-  && apt-get -y install npm openssh-client git python3-pip \
-  && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
-  && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
-  && apt-get update \
-  && apt-get -y install docker-ce docker-ce-cli containerd.io \
+RUN apk add --no-cache bash curl openrc docker npm openssh-client git python3-pip \
+  && rc-update add docker boot \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
