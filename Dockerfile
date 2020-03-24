@@ -9,6 +9,9 @@ RUN set -eux \
   && apt-get update \
   && apt-get -y install bash curl \
   && apt-get -y install npm openssh-client git python3-pip \
+  && curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add - \
+  && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+  && apt-get update \
   && apt-get -y install docker-ce docker-ce-cli containerd.io \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
