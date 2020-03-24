@@ -6,8 +6,9 @@ ARG SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN set -eux \
-  && apt-get -y install bash curl openrc docker \
+  && apt-get -y install bash curl openrc \
   && apt-get -y install npm openssh-client git pip3 \
+  && apt-get -y install docker-ce docker-ce-cli containerd.io \
   && mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
